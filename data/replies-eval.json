@@ -1,0 +1,382 @@
+{
+  "synthetic": true,
+  "note": "Invented replies to one slot offer, written for this test set. Expected outcome = what a front-desk person would do with the reply. 'hard' = typos, Gulf dialect, Arabic in Latin letters (Arabizi), a date instead of a weekday, a pick with a change request.",
+  "timeZone": "Asia/Dubai",
+  "now": "2026-11-02T09:00:00+04:00",
+  "offered": [
+    {
+      "id": "a1",
+      "start": "2026-11-03T16:00:00+04:00"
+    },
+    {
+      "id": "a2",
+      "start": "2026-11-04T08:30:00+04:00"
+    },
+    {
+      "id": "a3",
+      "start": "2026-11-05T11:00:00+04:00"
+    }
+  ],
+  "free": [
+    {
+      "id": "b1",
+      "start": "2026-11-05T17:20:00+04:00"
+    },
+    {
+      "id": "b2",
+      "start": "2026-11-06T10:00:00+04:00"
+    },
+    {
+      "id": "b3",
+      "start": "2026-11-07T09:00:00+04:00"
+    },
+    {
+      "id": "b4",
+      "start": "2026-11-04T18:00:00+04:00"
+    }
+  ],
+  "replies": [
+    {
+      "lang": "en",
+      "text": "2",
+      "expect": "book:a2",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "Option 3 please",
+      "expect": "book:a3",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "0",
+      "expect": "decline",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "STOP",
+      "expect": "stop",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "can I come Thursday after 5?",
+      "expect": "book:b1",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "Tuesday works",
+      "expect": "book:a1",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "the first one is fine",
+      "expect": "book:a1",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "I'll take the Wednesday morning one",
+      "expect": "book:a2",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "none of these work for me, I'm traveling",
+      "expect": "decline",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "Is Saturday morning possible?",
+      "expect": "book:b3",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "Wednesday evening after 6",
+      "expect": "book:b4",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "please don't message me again",
+      "expect": "stop",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "What were my blood test results?",
+      "expect": "handover",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "I have a fever and chest pain, should I come today?",
+      "expect": "handover",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "Friday at 10 would be perfect",
+      "expect": "book:b2",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "Sunday?",
+      "expect": "handover",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "yes the second",
+      "expect": "book:a2",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "ok 1",
+      "expect": "book:a1",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "Can my husband come instead of me?",
+      "expect": "handover",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "Monday afternoon",
+      "expect": "handover",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "tomorrow at 4pm",
+      "expect": "book:a1",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "Thursday morning",
+      "expect": "book:a3",
+      "set": "base"
+    },
+    {
+      "lang": "en",
+      "text": "unsubscribe",
+      "expect": "stop",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "٢",
+      "expect": "book:a2",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "رقم ٣",
+      "expect": "book:a3",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "٠",
+      "expect": "decline",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "إيقاف",
+      "expect": "stop",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "هل يمكنني الحضور يوم الخميس بعد الساعة ٥؟",
+      "expect": "book:b1",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "الثلاثاء مناسب",
+      "expect": "book:a1",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "الموعد الأول مناسب",
+      "expect": "book:a1",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "أفضل موعد الأربعاء صباحاً",
+      "expect": "book:a2",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "لا يناسبني أي من هذه المواعيد",
+      "expect": "decline",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "هل يوجد موعد يوم السبت الصباح؟",
+      "expect": "book:b3",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "الأربعاء مساءً بعد السادسة",
+      "expect": "book:b4",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "من فضلك لا ترسلوا لي رسائل مرة أخرى",
+      "expect": "stop",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "ما هي نتيجة تحليل الدم؟",
+      "expect": "handover",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "عندي حرارة وألم في الصدر",
+      "expect": "handover",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "الجمعة الساعة ١٠ ممتاز",
+      "expect": "book:b2",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "يوم الأحد؟",
+      "expect": "handover",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "نعم الثاني",
+      "expect": "book:a2",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "غداً الساعة ٤ عصراً",
+      "expect": "book:a1",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "هل يمكن أن يأتي زوجي بدلاً مني؟",
+      "expect": "handover",
+      "set": "base"
+    },
+    {
+      "lang": "ar",
+      "text": "صباح الخميس",
+      "expect": "book:a3",
+      "set": "base"
+    },
+    {
+      "set": "hard",
+      "lang": "en",
+      "text": "thursdy aftr 5 pls",
+      "expect": "book:b1"
+    },
+    {
+      "set": "hard",
+      "lang": "en",
+      "text": "any time after work on wed",
+      "expect": "book:b4"
+    },
+    {
+      "set": "hard",
+      "lang": "en",
+      "text": "can't do tuesday, wednesday early is ok",
+      "expect": "book:a2"
+    },
+    {
+      "set": "hard",
+      "lang": "en",
+      "text": "Book me for the 4th at 6pm",
+      "expect": "book:b4"
+    },
+    {
+      "set": "hard",
+      "lang": "en",
+      "text": "I'm not sure yet, I'll let you know",
+      "expect": "handover"
+    },
+    {
+      "set": "hard",
+      "lang": "en",
+      "text": "wrong number",
+      "expect": "handover"
+    },
+    {
+      "set": "hard",
+      "lang": "en",
+      "text": "3 but can it be 30 min later?",
+      "expect": "handover"
+    },
+    {
+      "set": "hard",
+      "lang": "ar",
+      "text": "الخميس بعد الدوام",
+      "expect": "book:b1"
+    },
+    {
+      "set": "hard",
+      "lang": "ar",
+      "text": "اوكي الاول",
+      "expect": "book:a1"
+    },
+    {
+      "set": "hard",
+      "lang": "ar",
+      "text": "ma3leh, mafi wagt hal usbu3",
+      "expect": "decline"
+    },
+    {
+      "set": "hard",
+      "lang": "ar",
+      "text": "bukra 4 el 3asr",
+      "expect": "book:a1"
+    },
+    {
+      "set": "hard",
+      "lang": "ar",
+      "text": "لا تراسلني",
+      "expect": "stop"
+    },
+    {
+      "set": "hard",
+      "lang": "ar",
+      "text": "رقم غلط",
+      "expect": "handover"
+    },
+    {
+      "set": "hard",
+      "lang": "ar",
+      "text": "السبت الساعة ٩ الصبح",
+      "expect": "book:b3"
+    }
+  ]
+}

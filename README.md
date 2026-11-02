@@ -33,7 +33,7 @@ Small clinics lose patients between steps. A lab result arrives and nobody revie
 | Open-loop detection with SLA, owner and priority | done, tested |
 | Next-step planner (review, chase, offer slots, call task, escalate) | done, tested |
 | Booking from a WhatsApp reply, closing with evidence | done, tested |
-| Language model layer (reply understanding, message drafting in EN/AR) | planned |
+| Reply understanding in English and Arabic (rules + language model, structured output only) | done, tested, measured below |
 | WhatsApp channel (sandbox) and calendar connector | planned |
 | Clinician sign-off screen and clinic dashboard | planned |
 | Pitch deck and demo video | planned for January 2027 |
@@ -45,7 +45,7 @@ The plan with dates and done criteria is in [docs/build-plan.md](docs/build-plan
 Requires Node.js 20 or later. No dependencies.
 
 ```sh
-npm test            # 11 tests
+npm test            # 16 tests
 npm run worklist    # the agent's worklist for the synthetic clinic
 ```
 
@@ -67,12 +67,39 @@ The worklist for `data/sample-clinic.json` (synthetic clinic in Dubai, 2 Nov 202
 - [routine] referral_unaccepted:f2 · owner dr-saleh · due 2026-11-11T08:00:00.000Z -> chase_referral (dr-saleh)
 ```
 
+## Reading free-text replies
+
+Patients answer in their own words, in English or Arabic. `src/reply.mjs` reads a reply in two layers:
+
+1. **Rules** for the short answers: a digit (also Arabic-Indic, "٢"), "option 2", "رقم ٣", 0 for none of these, STOP or إيقاف.
+2. **A language model** for everything else. It only fills a fixed request (intent, option, weekday, earliest and latest hour); the JSON schema is sent as a grammar, and the answer is validated again before use. The model sees the reply, today's date and the offered times, nothing else, and it never writes to the patient. A test fails if the visit reason, the patient's name or the phone number reaches it.
+
+The request is then matched against the real free slots of the right clinician, in the clinic's time zone: an offered slot that fits wins, then the earliest free slot that fits. No fit, a broken model answer, or anything that is not about booking (questions, symptoms, results, someone else coming) goes to the front desk.
+
+Measured on 57 synthetic replies (`data/replies-eval.json`, 27 in Arabic) with Gemma 4 E4B (Q8_0) running locally in llama.cpp, temperature 0, on 2 Nov 2026:
+
+| Set | Rules only | Rules + model |
+| --- | --- | --- |
+| Base: 43 plain replies (23 English, 20 Arabic) | 17/43 | 43/43 |
+| Hard: 14 replies with typos, Gulf dialect, Arabic in Latin letters, a date instead of a weekday, a pick with a change request | 4/14 | 10/14 |
+| All | 21/57 | 53/57 |
+
+Of the 4 misses, 1 is safe (a reply that could have been booked went to the front desk) and 3 booked the wrong slot, one of them "3 but can it be 30 min later?". That is the next step: a booking that came from the model is held and confirmed with the patient before it counts as evidence, measured on a new held-out set. Full output in [docs/reply-eval.txt](docs/reply-eval.txt).
+
+```sh
+llama-server -m gemma-4-E4B-it-Q8_0.gguf --port 8093 --jinja   # any OpenAI-compatible endpoint works
+MODEL_URL=http://127.0.0.1:8093 node src/eval-replies.mjs
+```
+
 ## Layout
 
 - `src/loops.mjs`: open-loop detection, priority and closing rules
 - `src/plan.mjs`: next-step planner, slot offer, booking from a reply
+- `src/reply.mjs`: reads a free-text reply (rules, then a language model) and maps it to a slot or a hand-over
+- `src/eval-replies.mjs`: accuracy on the synthetic reply set
 - `src/cli.mjs`: prints the worklist for a clinic export
 - `data/sample-clinic.json`: synthetic clinic used by the tests
+- `data/replies-eval.json`: 43 synthetic replies (23 English, 20 Arabic) with the outcome a front-desk person would choose
 - `test/`: `node:test` suite
 
 ## License

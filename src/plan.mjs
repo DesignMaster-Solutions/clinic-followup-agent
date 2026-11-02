@@ -17,7 +17,7 @@ export function freeSlots(data, clinicianId, fromMs, untilMs) {
     .sort((a, b) => Date.parse(a.start) - Date.parse(b.start));
 }
 
-function formatSlot(iso, timeZone) {
+export function formatSlot(iso, timeZone) {
   return new Intl.DateTimeFormat('en-GB', {
     timeZone,
     weekday: 'short',
@@ -122,9 +122,13 @@ export function bookFromReply(data, openLoop, offer, replyText, now = data.now) 
     return { status: 'unclear', next: 'ask_again' };
   }
   if (choice === 0) return { status: 'declined', next: 'call_task' };
+  return bookSlot(data, openLoop, offer.slots[choice - 1], now);
+}
 
-  const slot = byId(data.calendar.slots, offer.slots[choice - 1]);
-  if (slot.booked) return { status: 'taken', next: 'offer_again' };
+// Takes one free slot for the loop's return visit; a slot booked meanwhile is offered again.
+export function bookSlot(data, openLoop, slotId, now = data.now) {
+  const slot = byId(data.calendar.slots, slotId);
+  if (!slot || slot.booked) return { status: 'taken', next: 'offer_again' };
 
   slot.booked = true;
   slot.patientId = openLoop.patientId;
