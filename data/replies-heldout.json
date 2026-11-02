@@ -1,0 +1,399 @@
+{
+  "synthetic": true,
+  "note": "Held-out set written by Copilot CLI (Auto mode) on 2 Nov 2026 without access to the reply agent's implementation prompt or development set. Labels follow the guide in this file.",
+  "guide": "Book the explicitly selected offered slot; for another day or time, use a matching free slot, preferring a fitting offered slot and otherwise the earliest free one. Decline only when no offered time works and no alternative day or time is named; stop for any opt-out. Hand over questions, clinical concerns or results, another attendee, wrong numbers, unsupported changes or times, ambiguous replies, or a language other than English or Arabic. Interpret dates and relative days in Asia/Dubai, with the UAE weekend on Saturday and Sunday. Offered slots are a1 Tue 3 Nov 16:00, a2 Wed 4 Nov 08:30, a3 Thu 5 Nov 11:00; other free slots are b1 Thu 5 Nov 17:20, b2 Fri 6 Nov 10:00, b3 Sat 7 Nov 09:00, and b4 Wed 4 Nov 18:00.",
+  "replies": [
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "en",
+      "text": "1",
+      "expect": "book:a1",
+      "why": "Selects the first offered slot."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "Number two, please",
+      "expect": "book:a2",
+      "why": "Clearly chooses the second option."
+    },
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "en",
+      "text": "Thursday at 11 works for me",
+      "expect": "book:a3",
+      "why": "Matches the offered Thursday time."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "Can I take Friday 6th at 10?",
+      "expect": "book:b2",
+      "why": "Matches the free Friday morning slot."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "Tomorrow at 4pm is good",
+      "expect": "book:a1",
+      "why": "Tomorrow is Tuesday, matching offered slot a1."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "Day after tomorrow at 8:30",
+      "expect": "book:a2",
+      "why": "The relative date and time match offered slot a2."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "The 6th at 10 in the morning, please",
+      "expect": "book:b2",
+      "why": "The date and time match free slot b2."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "Sat mornin 9, plz",
+      "expect": "book:b3",
+      "why": "Saturday at 09:00 matches free slot b3."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "After work Thursday, around 5:20",
+      "expect": "book:b1",
+      "why": "The approximate time matches free slot b1."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "Wednesday evening after work",
+      "expect": "book:b4",
+      "why": "Wednesday evening matches the free 18:00 slot."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "1 or 2, both fine",
+      "expect": "book:a1",
+      "why": "Both offered options fit; the earlier offered slot wins."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "Not Tuesday; Wednesday morning is ok",
+      "expect": "book:a2",
+      "why": "The negation excludes Tuesday and accepts offered Wednesday morning."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "Could I do Thursday 5:20 instead?",
+      "expect": "book:b1",
+      "why": "The requested alternate time is free as b1."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "3 works 👍",
+      "expect": "book:a3",
+      "why": "Emoji does not obscure the clear selection."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "Wednesday morning at eight thirty, voice typing sorry",
+      "expect": "book:a2",
+      "why": "Wednesday at 08:30 matches offered slot a2."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "Friday at 10 works",
+      "expect": "book:b2",
+      "why": "Matches the only free Friday morning slot."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "0",
+      "expect": "decline",
+      "why": "Uses the explicit decline code."
+    },
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "en",
+      "text": "Lovely choices, none of them work for me 🙃",
+      "expect": "decline",
+      "why": "Declines all offered times without suggesting another."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "STOP messaging me",
+      "expect": "stop",
+      "why": "Explicitly opts out of further messages."
+    },
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "en",
+      "text": "Please remove me from reminders",
+      "expect": "stop",
+      "why": "Requests removal from future reminders."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "Can I come Tuesday morning instead?",
+      "expect": "handover",
+      "why": "No Tuesday morning appointment is available."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "en",
+      "text": "I have chest pain since yesterday, should I wait until the appointment? 2",
+      "expect": "handover",
+      "why": "A clinical concern requires staff review despite the selection."
+    },
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "ar",
+      "text": "١",
+      "expect": "book:a1",
+      "why": "Arabic-Indic digit selects the first offered slot."
+    },
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "ar",
+      "text": "الخيار الثاني مناسب، شكراً",
+      "expect": "book:a2",
+      "why": "Clearly accepts the second offered option."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "الخميس الساعة ١١ يناسبني",
+      "expect": "book:a3",
+      "why": "The weekday and Arabic-Indic time match offered slot a3."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "باجر الساعة أربع العصر",
+      "expect": "book:a1",
+      "why": "Gulf Arabic for tomorrow at four matches offered slot a1."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "بعد باچر ٨ ونص الصبح",
+      "expect": "book:a2",
+      "why": "The relative day and morning time match offered slot a2."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "۲",
+      "expect": "book:a2",
+      "why": "The Persian digit selects the second offered slot."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "يوم ٦ الساعة ١٠ صباحاً",
+      "expect": "book:b2",
+      "why": "The date and time match free slot b2."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "el sabt 9 sob7 tamam",
+      "expect": "book:b3",
+      "why": "Arabizi means Saturday at nine in the morning, matching b3."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "الخميس بعد الدوام حوالي ٥:٢٠",
+      "expect": "book:b1",
+      "why": "The after-work time matches free slot b1."
+    },
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "ar",
+      "text": "ولا وقت من هالأوقات يناسبني، اتصلوا فيني",
+      "expect": "decline",
+      "why": "Declines the offered times without proposing another."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "ما أقدر على أي موعد من الموجودين",
+      "expect": "decline",
+      "why": "Declines all offered appointments."
+    },
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "ar",
+      "text": "ولا واحد مناسب",
+      "expect": "decline",
+      "why": "Says none of the offered options work."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "٠، لو سمحتوا كلموني",
+      "expect": "decline",
+      "why": "Uses the Arabic-Indic decline code and asks for a call."
+    },
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "ar",
+      "text": "وقفوا إرسال الرسائل لو سمحتوا",
+      "expect": "stop",
+      "why": "Requests that messages stop."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "Please لا ترسلوا لي تذكيرات بعد اليوم",
+      "expect": "stop",
+      "why": "Opts out of future reminders."
+    },
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "ar",
+      "text": "شيلوا رقمي من قائمة الواتساب",
+      "expect": "stop",
+      "why": "Asks to remove the number from WhatsApp messaging."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "مش حابة توصلني رسائل تاني",
+      "expect": "stop",
+      "why": "Egyptian Arabic opt-out from future messages."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "عندي ضيق نفس من أمس، أختار ٢ ولا لازم أجي اليوم؟",
+      "expect": "handover",
+      "why": "A breathing symptom needs clinical review despite the option."
+    },
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "ar",
+      "text": "هل لازم أكون صايم قبل التحاليل؟",
+      "expect": "handover",
+      "why": "Asks a medical preparation question."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "أمي هي اللي راح تجي بدالي على الموعد ١",
+      "expect": "handover",
+      "why": "Says another person will attend instead of the patient."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "الخيار ٣ بس بعد نص ساعة",
+      "expect": "handover",
+      "why": "The requested time change has no matching free slot."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "الأحد الساعة ١١ ينفع؟",
+      "expect": "handover",
+      "why": "There is no Sunday slot available."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "ar",
+      "text": "تمام",
+      "expect": "handover",
+      "why": "An unclear acknowledgment does not identify a slot."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "other",
+      "text": "Kal Tuesday 4 baje aa sakta hoon? I have a fever too",
+      "expect": "handover",
+      "why": "Mixed Hindi-English includes a clinical concern."
+    },
+    {
+      "set": "heldout",
+      "hard": false,
+      "lang": "other",
+      "text": "Friday ko 11am possible hai?",
+      "expect": "handover",
+      "why": "Mixed Hindi-English requests a time with no matching slot."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "other",
+      "text": "Salamat po, option 2 na lang, pero kailangan ba mag-fasting?",
+      "expect": "handover",
+      "why": "Tagalog-English asks a medical preparation question."
+    },
+    {
+      "set": "heldout",
+      "hard": true,
+      "lang": "other",
+      "text": "Option 1 theek hai, but kya meri wife aa sakti hai instead?",
+      "expect": "handover",
+      "why": "Urdu-English asks whether another person can attend."
+    }
+  ]
+}
