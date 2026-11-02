@@ -4,12 +4,23 @@
 const DAY = 24 * 3600e3;
 const MAX_OFFERED_SLOTS = 3;
 const PAST_DUE_SEARCH = 14 * DAY;
+// Slots offered by message start at least this far ahead: the patient needs time to answer.
+export const MIN_LEAD = 12 * 3600e3;
 
 const byId = (list, id) => (list ?? []).find((item) => item.id === id);
 
+const HOLD_HOURS = 12;
+const HOLD_STOPS_BEFORE_SLOT = 2 * 3600e3;
+
+// Free = nobody booked it and no other loop holds it right now.
+export function isFree(slot, atMs, loopId = null) {
+  if (slot.booked) return false;
+  return !(slot.heldFor && slot.heldFor !== loopId && Date.parse(slot.heldUntil) > atMs);
+}
+
 export function freeSlots(data, clinicianId, fromMs, untilMs) {
   return (data.calendar?.slots ?? [])
-    .filter((slot) => slot.clinicianId === clinicianId && !slot.booked)
+    .filter((slot) => slot.clinicianId === clinicianId && isFree(slot, fromMs))
     .filter((slot) => {
       const start = Date.parse(slot.start);
       return start > fromMs && start <= untilMs;
@@ -37,6 +48,14 @@ export function draftSlotOffer(data, patient, clinician, slots) {
     `It is time to book your follow-up visit with ${clinician.name}. Reply with the number of the time that suits you:`,
     ...lines,
     'Reply 0 if none of these work and we will call you.',
+  ].join('\n');
+}
+
+// Scheduling text only, sent when the time came from a free-text reply and must be confirmed.
+export function draftConfirmation(data, patient, clinician, slot) {
+  return [
+    `${patient.firstName}, ${clinician.name} has ${formatSlot(slot.start, data.clinic.timezone)} free for your follow-up visit.`,
+    'Reply 1 to confirm, or 0 and we will call you.',
   ].join('\n');
 }
 
@@ -74,7 +93,7 @@ export function planNextStep(data, openLoop, now = data.now) {
     const clinician = byId(data.clinic.clinicians, visit.clinicianId);
     const due = Date.parse(visit.dueBy);
     const until = openLoop.overdue ? at + PAST_DUE_SEARCH : due;
-    const slots = freeSlots(data, visit.clinicianId, at, until).slice(0, MAX_OFFERED_SLOTS);
+    const slots = freeSlots(data, visit.clinicianId, at + MIN_LEAD, until).slice(0, MAX_OFFERED_SLOTS);
 
     if (slots.length === 0) {
       const [earliest] = freeSlots(data, visit.clinicianId, at, Number.POSITIVE_INFINITY);
@@ -128,12 +147,32 @@ export function bookFromReply(data, openLoop, offer, replyText, now = data.now) 
 // Takes one free slot for the loop's return visit; a slot booked meanwhile is offered again.
 export function bookSlot(data, openLoop, slotId, now = data.now) {
   const slot = byId(data.calendar.slots, slotId);
-  if (!slot || slot.booked) return { status: 'taken', next: 'offer_again' };
+  if (!slot || !isFree(slot, Date.parse(now), openLoop.id)) return { status: 'taken', next: 'offer_again' };
 
   slot.booked = true;
   slot.patientId = openLoop.patientId;
+  delete slot.heldFor;
+  delete slot.heldUntil;
   const visit = byId(data.returnVisits, openLoop.recordId);
   visit.bookedAt = now;
   visit.slotId = slot.id;
   return { status: 'booked', slotId: slot.id, evidence: { kind: 'booking', slotId: slot.id, at: now } };
+}
+
+// Keeps a slot for one loop while the patient confirms it: 12 h, and never closer than 2 h to the visit.
+export function holdSlot(data, openLoop, slotId, now = data.now) {
+  const slot = byId(data.calendar.slots, slotId);
+  const at = Date.parse(now);
+  const until = Math.min(at + HOLD_HOURS * 3600e3, Date.parse(slot?.start) - HOLD_STOPS_BEFORE_SLOT);
+  if (!slot || !isFree(slot, at, openLoop.id) || !(until > at)) return { status: 'taken', next: 'offer_again' };
+  slot.heldFor = openLoop.id;
+  slot.heldUntil = new Date(until).toISOString();
+  return { status: 'held', slotId: slot.id, heldUntil: slot.heldUntil };
+}
+
+export function releaseHold(data, openLoop, slotId) {
+  const slot = byId(data.calendar.slots, slotId);
+  if (slot?.heldFor !== openLoop.id) return;
+  delete slot.heldFor;
+  delete slot.heldUntil;
 }

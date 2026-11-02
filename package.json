@@ -5,9 +5,13 @@
   "type": "module",
   "license": "MIT",
   "private": true,
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "test": "node --test",
-    "worklist": "node src/cli.mjs data/sample-clinic.json"
+    "worklist": "node src/cli.mjs data/sample-clinic.json",
+    "replay": "node src/replay-cli.mjs",
+    "eval:replies": "node src/eval-replies.mjs"
   }
 }

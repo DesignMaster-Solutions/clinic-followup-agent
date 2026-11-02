@@ -56,14 +56,14 @@ export function findOpenLoops(data, now = data.now) {
   }
 
   for (const referral of data.referrals ?? []) {
-    if (referral.acceptedAt) continue;
+    if (referral.acceptedAt || referral.planDocumentedAt) continue;
     const sla = REFERRAL_SLA[referral.urgency] ?? REFERRAL_SLA.routine;
     const urgency = referral.urgency === 'urgent' ? 'urgent' : 'routine';
     loops.push(loop('referral_unaccepted', referral, referral.referredBy, ms(referral.sentAt) + sla, at, urgency));
   }
 
   for (const visit of data.returnVisits ?? []) {
-    if (visit.bookedAt) continue;
+    if (visit.bookedAt || visit.planDocumentedAt) continue;
     const due = ms(visit.dueBy);
     if (due - at > RETURN_WINDOW) continue;
     loops.push(loop('return_unbooked', visit, 'front-desk', due, at, 'routine'));

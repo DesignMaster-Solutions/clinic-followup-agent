@@ -1,45 +1,77 @@
-57 synthetic replies (27 in Arabic, 14 hard)
+106 synthetic replies: 57 dev (base + hard), 49 held-out
+final = after the confirmation step; the patient confirms only the time they asked for
 
-rules only: 21/57 correct (base 17/43, hard 4/14; en 12/30, ar 9/27)
-  miss [base en] "Option 3 please" expected book:a3, got handover
-  miss [base en] "can I come Thursday after 5?" expected book:b1, got handover
-  miss [base en] "Tuesday works" expected book:a1, got handover
-  miss [base en] "the first one is fine" expected book:a1, got handover
-  miss [base en] "I'll take the Wednesday morning one" expected book:a2, got handover
-  miss [base en] "none of these work for me, I'm traveling" expected decline, got handover
-  miss [base en] "Is Saturday morning possible?" expected book:b3, got handover
-  miss [base en] "Wednesday evening after 6" expected book:b4, got handover
-  miss [base en] "please don't message me again" expected stop, got handover
-  miss [base en] "Friday at 10 would be perfect" expected book:b2, got handover
-  miss [base en] "yes the second" expected book:a2, got handover
-  miss [base en] "ok 1" expected book:a1, got handover
-  miss [base en] "tomorrow at 4pm" expected book:a1, got handover
-  miss [base en] "Thursday morning" expected book:a3, got handover
-  miss [base ar] "هل يمكنني الحضور يوم الخميس بعد الساعة ٥؟" expected book:b1, got handover
-  miss [base ar] "الثلاثاء مناسب" expected book:a1, got handover
-  miss [base ar] "الموعد الأول مناسب" expected book:a1, got handover
-  miss [base ar] "أفضل موعد الأربعاء صباحاً" expected book:a2, got handover
-  miss [base ar] "لا يناسبني أي من هذه المواعيد" expected decline, got handover
-  miss [base ar] "هل يوجد موعد يوم السبت الصباح؟" expected book:b3, got handover
-  miss [base ar] "الأربعاء مساءً بعد السادسة" expected book:b4, got handover
-  miss [base ar] "من فضلك لا ترسلوا لي رسائل مرة أخرى" expected stop, got handover
-  miss [base ar] "الجمعة الساعة ١٠ ممتاز" expected book:b2, got handover
-  miss [base ar] "نعم الثاني" expected book:a2, got handover
-  miss [base ar] "غداً الساعة ٤ عصراً" expected book:a1, got handover
-  miss [base ar] "صباح الخميس" expected book:a3, got handover
-  miss [hard en] "thursdy aftr 5 pls" expected book:b1, got handover
-  miss [hard en] "any time after work on wed" expected book:b4, got handover
-  miss [hard en] "can't do tuesday, wednesday early is ok" expected book:a2, got handover
-  miss [hard en] "Book me for the 4th at 6pm" expected book:b4, got handover
-  miss [hard ar] "الخميس بعد الدوام" expected book:b1, got handover
-  miss [hard ar] "اوكي الاول" expected book:a1, got handover
-  miss [hard ar] "ma3leh, mafi wagt hal usbu3" expected decline, got handover
-  miss [hard ar] "bukra 4 el 3asr" expected book:a1, got handover
-  miss [hard ar] "لا تراسلني" expected stop, got handover
-  miss [hard ar] "السبت الساعة ٩ الصبح" expected book:b3, got handover
+rules only
+  base     first read 23/43  final 23/43  wrong bookings kept 0  confirmations asked 0 (0 wrong, refused)  en 13/23 ar 10/20
+  hard     first read 5/14   final 5/14   wrong bookings kept 0  confirmations asked 0 (0 wrong, refused)  en 3/7 ar 2/7
+  heldout  first read 19/49  final 19/49  wrong bookings kept 0  confirmations asked 0 (0 wrong, refused)  en 6/22 ar 9/23
+    miss [base en] "can I come Thursday after 5?" expected book:b1, first read handover
+    miss [base en] "Tuesday works" expected book:a1, first read handover
+    miss [base en] "I'll take the Wednesday morning one" expected book:a2, first read handover
+    miss [base en] "none of these work for me, I'm traveling" expected decline, first read handover
+    miss [base en] "Is Saturday morning possible?" expected book:b3, first read handover
+    miss [base en] "Wednesday evening after 6" expected book:b4, first read handover
+    miss [base en] "please don't message me again" expected stop, first read handover
+    miss [base en] "Friday at 10 would be perfect" expected book:b2, first read handover
+    miss [base en] "tomorrow at 4pm" expected book:a1, first read handover
+    miss [base en] "Thursday morning" expected book:a3, first read handover
+    miss [base ar] "هل يمكنني الحضور يوم الخميس بعد الساعة ٥؟" expected book:b1, first read handover
+    miss [base ar] "الثلاثاء مناسب" expected book:a1, first read handover
+    miss [base ar] "أفضل موعد الأربعاء صباحاً" expected book:a2, first read handover
+    miss [base ar] "لا يناسبني أي من هذه المواعيد" expected decline, first read handover
+    miss [base ar] "هل يوجد موعد يوم السبت الصباح؟" expected book:b3, first read handover
+    miss [base ar] "الأربعاء مساءً بعد السادسة" expected book:b4, first read handover
+    miss [base ar] "من فضلك لا ترسلوا لي رسائل مرة أخرى" expected stop, first read handover
+    miss [base ar] "الجمعة الساعة ١٠ ممتاز" expected book:b2, first read handover
+    miss [base ar] "غداً الساعة ٤ عصراً" expected book:a1, first read handover
+    miss [base ar] "صباح الخميس" expected book:a3, first read handover
+    miss [hard en] "thursdy aftr 5 pls" expected book:b1, first read handover
+    miss [hard en] "any time after work on wed" expected book:b4, first read handover
+    miss [hard en] "can't do tuesday, wednesday early is ok" expected book:a2, first read handover
+    miss [hard en] "Book me for the 4th at 6pm" expected book:b4, first read handover
+    miss [hard ar] "الخميس بعد الدوام" expected book:b1, first read handover
+    miss [hard ar] "ma3leh, mafi wagt hal usbu3" expected decline, first read handover
+    miss [hard ar] "bukra 4 el 3asr" expected book:a1, first read handover
+    miss [hard ar] "لا تراسلني" expected stop, first read handover
+    miss [hard ar] "السبت الساعة ٩ الصبح" expected book:b3, first read handover
+    miss [heldout en] "Thursday at 11 works for me" expected book:a3, first read handover
+    miss [heldout en] "Can I take Friday 6th at 10?" expected book:b2, first read handover
+    miss [heldout en] "Tomorrow at 4pm is good" expected book:a1, first read handover
+    miss [heldout en] "Day after tomorrow at 8:30" expected book:a2, first read handover
+    miss [heldout en] "The 6th at 10 in the morning, please" expected book:b2, first read handover
+    miss [heldout en] "Sat mornin 9, plz" expected book:b3, first read handover
+    miss [heldout en] "After work Thursday, around 5:20" expected book:b1, first read handover
+    miss [heldout en] "Wednesday evening after work" expected book:b4, first read handover
+    miss [heldout en] "1 or 2, both fine" expected book:a1, first read handover
+    miss [heldout en] "Not Tuesday; Wednesday morning is ok" expected book:a2, first read handover
+    miss [heldout en] "Could I do Thursday 5:20 instead?" expected book:b1, first read handover
+    miss [heldout en] "Wednesday morning at eight thirty, voice typing sorry" expected book:a2, first read handover
+    miss [heldout en] "Friday at 10 works" expected book:b2, first read handover
+    miss [heldout en] "Lovely choices, none of them work for me 🙃" expected decline, first read handover
+    miss [heldout en] "STOP messaging me" expected stop, first read handover
+    miss [heldout en] "Please remove me from reminders" expected stop, first read handover
+    miss [heldout ar] "الخميس الساعة ١١ يناسبني" expected book:a3, first read handover
+    miss [heldout ar] "باجر الساعة أربع العصر" expected book:a1, first read handover
+    miss [heldout ar] "بعد باچر ٨ ونص الصبح" expected book:a2, first read handover
+    miss [heldout ar] "يوم ٦ الساعة ١٠ صباحاً" expected book:b2, first read handover
+    miss [heldout ar] "el sabt 9 sob7 tamam" expected book:b3, first read handover
+    miss [heldout ar] "الخميس بعد الدوام حوالي ٥:٢٠" expected book:b1, first read handover
+    miss [heldout ar] "ولا وقت من هالأوقات يناسبني، اتصلوا فيني" expected decline, first read handover
+    miss [heldout ar] "ما أقدر على أي موعد من الموجودين" expected decline, first read handover
+    miss [heldout ar] "ولا واحد مناسب" expected decline, first read handover
+    miss [heldout ar] "٠، لو سمحتوا كلموني" expected decline, first read handover
+    miss [heldout ar] "وقفوا إرسال الرسائل لو سمحتوا" expected stop, first read handover
+    miss [heldout ar] "Please لا ترسلوا لي تذكيرات بعد اليوم" expected stop, first read handover
+    miss [heldout ar] "شيلوا رقمي من قائمة الواتساب" expected stop, first read handover
+    miss [heldout ar] "مش حابة توصلني رسائل تاني" expected stop, first read handover
 
-rules + model (http://127.0.0.1:8093): 53/57 correct (base 43/43, hard 10/14; en 27/30, ar 26/27)
-  miss [hard en] "can't do tuesday, wednesday early is ok" expected book:a2, got book:a3
-  miss [hard en] "Book me for the 4th at 6pm" expected book:b4, got book:a2
-  miss [hard en] "3 but can it be 30 min later?" expected handover, got book:a3
-  miss [hard ar] "الخميس بعد الدوام" expected book:b1, got handover
+rules + model (http://127.0.0.1:8093)
+  base     first read 42/43  final 42/43  wrong bookings kept 0  confirmations asked 15 (0 wrong, refused)  en 23/23 ar 19/20
+  hard     first read 14/14  final 14/14  wrong bookings kept 0  confirmations asked 7 (0 wrong, refused)  en 7/7 ar 7/7
+  heldout  first read 44/49  final 45/49  wrong bookings kept 0  confirmations asked 18 (2 wrong, refused)  en 20/22 ar 20/23
+    miss [base ar] "صباح الخميس" expected book:a3, first read handover {"intent":"other","option":0,"day":5,"weekday":"thu","after":-1,"before":-1}
+    miss [heldout en] "Day after tomorrow at 8:30" expected book:a2, first read handover {"intent":"ask_time","option":0,"day":5,"weekday":"thu","after":8,"before":9}
+    miss [heldout en] "1 or 2, both fine" expected book:a1, first read book:a2 {"intent":"choose_option","option":2,"day":4,"weekday":"wed","after":8,"before":9}
+    miss [heldout ar] "el sabt 9 sob7 tamam" expected book:b3, first read handover {"intent":"ask_time","option":0,"day":9,"weekday":"sat","after":7,"before":8}
+    miss [heldout ar] "٠، لو سمحتوا كلموني" expected decline, first read handover {"intent":"other","option":0,"day":0,"weekday":"none","after":-1,"before":-1}
+    miss [heldout ar] "الخيار ٣ بس بعد نص ساعة" expected handover, first read book:a3 {"intent":"choose_option","option":3,"day":5,"weekday":"thu","after":11,"before":12}
