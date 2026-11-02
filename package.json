@@ -7,7 +7,7 @@
   "private": true,
   "engines": { "node": ">=20" },
   "scripts": {
-    "test": "node --test test/",
+    "test": "node --test",
     "worklist": "node src/cli.mjs data/sample-clinic.json"
   }
 }
