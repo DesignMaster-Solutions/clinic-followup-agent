@@ -1,0 +1,13 @@
+{
+  "name": "clinic-followup-agent",
+  "version": "0.1.0",
+  "description": "Loop Closer for Clinics: an agent that finds and closes open follow-up loops in small clinics.",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test test/",
+    "worklist": "node src/cli.mjs data/sample-clinic.json"
+  }
+}

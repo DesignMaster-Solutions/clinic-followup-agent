@@ -1,0 +1,50 @@
+{
+  "synthetic": true,
+  "note": "Every name, phone number and record in this file is invented for testing. No real patient data is used anywhere in this repository.",
+  "now": "2026-11-02T09:00:00+04:00",
+  "clinic": {
+    "name": "Al Noor Family Clinic (synthetic)",
+    "timezone": "Asia/Dubai",
+    "lead": "dr-haddad",
+    "clinicians": [
+      { "id": "dr-haddad", "name": "Dr. Haddad" },
+      { "id": "dr-saleh", "name": "Dr. Saleh" }
+    ]
+  },
+  "patients": [
+    { "id": "p1", "firstName": "Layla", "phone": "+971500000001", "whatsappOptIn": false },
+    { "id": "p2", "firstName": "Rashid", "phone": "+971500000002", "whatsappOptIn": true },
+    { "id": "p3", "firstName": "Mariam", "phone": "+971500000003", "whatsappOptIn": true },
+    { "id": "p4", "firstName": "Yousef", "phone": "+971500000004", "whatsappOptIn": true },
+    { "id": "p5", "firstName": "Sara", "phone": "+971500000005", "whatsappOptIn": true }
+  ],
+  "results": [
+    { "id": "r1", "patientId": "p1", "test": "Potassium", "flag": "critical", "orderedBy": "dr-haddad", "receivedAt": "2026-11-02T03:30:00+04:00", "reviewedAt": null },
+    { "id": "r2", "patientId": "p2", "test": "HbA1c", "flag": "abnormal", "orderedBy": "dr-saleh", "receivedAt": "2026-11-01T15:00:00+04:00", "reviewedAt": null },
+    { "id": "r3", "patientId": "p3", "test": "Lipid panel", "flag": "normal", "orderedBy": "dr-saleh", "receivedAt": "2026-10-30T11:00:00+04:00", "reviewedAt": "2026-10-30T16:20:00+04:00" }
+  ],
+  "referrals": [
+    { "id": "f1", "patientId": "p4", "to": "Cardiology (external)", "urgency": "urgent", "referredBy": "dr-haddad", "sentAt": "2026-10-30T10:00:00+04:00", "acceptedAt": null },
+    { "id": "f2", "patientId": "p2", "to": "Ophthalmology (diabetic eye check)", "urgency": "routine", "referredBy": "dr-saleh", "sentAt": "2026-10-28T12:00:00+04:00", "acceptedAt": null }
+  ],
+  "returnVisits": [
+    { "id": "v1", "patientId": "p5", "clinicianId": "dr-saleh", "reason": "post-op wound check", "dueBy": "2026-11-06T18:00:00+04:00", "bookedAt": null },
+    { "id": "v2", "patientId": "p3", "clinicianId": "dr-saleh", "reason": "annual review", "dueBy": "2026-12-20T18:00:00+04:00", "bookedAt": null },
+    { "id": "v3", "patientId": "p1", "clinicianId": "dr-haddad", "reason": "blood pressure follow-up", "dueBy": "2026-11-04T18:00:00+04:00", "bookedAt": null },
+    { "id": "v4", "patientId": "p4", "clinicianId": "dr-haddad", "reason": "medication review", "dueBy": "2026-11-03T12:00:00+04:00", "bookedAt": null }
+  ],
+  "calendar": {
+    "slots": [
+      { "id": "s0", "clinicianId": "dr-saleh", "start": "2026-11-01T10:00:00+04:00", "booked": false },
+      { "id": "s1", "clinicianId": "dr-haddad", "start": "2026-11-03T09:00:00+04:00", "booked": true },
+      { "id": "s2", "clinicianId": "dr-haddad", "start": "2026-11-03T09:20:00+04:00", "booked": true },
+      { "id": "s3", "clinicianId": "dr-haddad", "start": "2026-11-04T10:00:00+04:00", "booked": false },
+      { "id": "s4", "clinicianId": "dr-haddad", "start": "2026-11-04T10:20:00+04:00", "booked": false },
+      { "id": "s5", "clinicianId": "dr-saleh", "start": "2026-11-03T16:00:00+04:00", "booked": false },
+      { "id": "s6", "clinicianId": "dr-saleh", "start": "2026-11-04T08:30:00+04:00", "booked": false },
+      { "id": "s7", "clinicianId": "dr-saleh", "start": "2026-11-05T11:00:00+04:00", "booked": false },
+      { "id": "s8", "clinicianId": "dr-saleh", "start": "2026-11-05T11:20:00+04:00", "booked": false },
+      { "id": "s9", "clinicianId": "dr-saleh", "start": "2026-11-07T09:00:00+04:00", "booked": false }
+    ]
+  }
+}
