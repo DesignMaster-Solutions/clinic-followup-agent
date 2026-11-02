@@ -99,15 +99,17 @@ MODEL_URL=http://127.0.0.1:8093 npm run eval:replies
 
 `npm run replay` runs a synthetic month (30 days, 3 clinicians, 400 patients, 80% WhatsApp consent; per working day 12 lab results, 2 referrals and 6 return visits) hour by hour through the same engine, once with the agent and once without it. The clinic's month is identical in both runs; only people's behaviour differs. Every behaviour (how fast a clinician reviews, how often a patient answers, how often the front desk reaches a patient) is an assumption, listed in `ASSUMPTIONS` in `src/replay.mjs` and printed with the result. **The "without the agent" column is an assumed baseline, not a measurement.**
 
-| Seed 1 | With the agent | Without the agent (assumed) |
-| --- | --- | --- |
-| Loops closed with evidence by day 30 | 469 of 495 (95%) | 302 of 493 (61%) |
-| Loops closed late or still open | 43 | 307 |
-| Return visits booked | 113 of 145 | 54 of 143 |
-| Median hours to close a return-visit loop | 12 | 99 |
-| Escalated to a named person | 18 | 0 |
-| Patient messages / front-desk calls | 178 / 75 | 0 / 0 |
-| Wrong bookings kept, double bookings, messages without consent, agent-initiated messages outside 08:00-21:00 | 0 / 0 / 0 / 0 | - |
+| Seed 1 | With the agent | Without the agent | Rests on |
+| --- | --- | --- | --- |
+| Loops closed with evidence by day 30 | 465 of 495 (94%) | 296 of 488 (61%) | review and call assumptions below |
+| Return visits booked | 112 of 145 | 52 of 142 | front desk reaches and books 70% of calls (no source); patients book alone 50% of the time (no source) |
+| Median hours to close a result loop | 23 | 100 | abnormal results: weak published support; normal results: no source |
+| Critical results reviewed after 4 h | 0 of 10 | 0 of 6 | the lab phones critical values within minutes (published); **no gain is claimed here** |
+| Escalated to a named person | 10 | 0 | |
+| Patient messages / front-desk calls | 211 / 115 | 0 / 0 | patient reply rate 0.35 (published range 0.14-0.52) |
+| Wrong bookings kept, double bookings, messages without consent, agent-initiated messages outside 08:00-21:00 | 0 / 0 / 0 / 0 | - | invariants, tested |
+
+Across the published range of patient reply rates (0.15 / 0.35 / 0.5) the agent books 105 / 112 / 111 of the 145 return visits, because unanswered offers become front-desk calls (129 / 115 / 104 calls). Where each assumption comes from, and which ones have no published source, is in [docs/evidence.md](docs/evidence.md); the critical-result and reply-rate values were corrected from it on 2 Nov 2026.
 
 The four zeros are invariants: `test/replay.test.mjs` checks them on three seeds, and a test turns red if the consent check is removed from the planner. Every loop closes only with the evidence its kind allows (`closeLoop` throws otherwise). The replay also found two problems that are fixed now: offers used the first free slot, sometimes an hour away, so a patient's answer arrived after the time had passed (offers now start at least 12 hours ahead), and several patients were offered the same slots at once (a slot taken meanwhile now leads to new times, not a phone call).
 

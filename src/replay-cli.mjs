@@ -28,5 +28,11 @@ console.log(`Synthetic month (seed ${A.seed}): ${A.days} days, ${A.clinic.clinic
 console.log(`${'metric'.padEnd(42)}${'with the agent'.padEnd(18)}without (assumed baseline)`);
 for (const [name, get] of rows) console.log(`${name.padEnd(42)}${String(get(agent)).padEnd(18)}${get(without)}`);
 console.log(`bookings with the agent: ${JSON.stringify(agent.bookings)}; without: ${JSON.stringify(without.bookings)}`);
+// The reply rate has the widest published range, so the result is shown across it, not at one point.
+const atRate = async (p) => summarize(await replay(true, { ...A, withAgent: { ...A.withAgent, patientReplies: { ...A.withAgent.patientReplies, p } } }));
+const sweep = await Promise.all([0.15, 0.35, 0.5].map(atRate));
+console.log(`with the agent at patient reply rates 0.15 / 0.35 / 0.5: return visits booked ${sweep.map((s) => s.returnVisitsBooked).join(' / ')} of ${agent.returnVisits}, `
+  + `loops closed ${sweep.map((s) => Math.round((100 * s.closed) / s.loops)).join(' / ')}%, front-desk calls ${sweep.map((s) => s.frontDeskCalls).join(' / ')}`);
+console.log('Sources for the assumptions, and which ones have none: docs/evidence.md');
 console.log('\nAssumptions (every number above depends on them):');
 console.log(JSON.stringify({ withAgent: A.withAgent, withoutAgent: A.withoutAgent, volume: A.perWorkday, optIn: A.whatsappOptIn }, null, 1));

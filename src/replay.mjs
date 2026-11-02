@@ -24,12 +24,13 @@ export const ASSUMPTIONS = {
   urgentReferral: 0.2,
   returnDueDays: [3, 21],
   withAgent: {
-    reviewAfterRequestHours: { critical: [0.5, 3], abnormal: [2, 24], normal: [4, 72] },
+    // Critical values still reach the clinician by the lab's phone call; the agent is only the backstop (docs/evidence.md).
+    reviewAfterRequestHours: { critical: [0.1, 1], abnormal: [2, 24], normal: [4, 72] },
     reviewAfterEscalationHours: [0.5, 4],
     referralAcceptedAfterChase: { p: 0.8, days: [1, 5] },
     planAfterEscalationHours: [4, 48],
-    patientReplies: { p: 0.7, hours: [0.2, 12] },
-    replyKind: { number: 0.6, freeText: 0.25, noneWork: 0.1, stop: 0.05 },
+    patientReplies: { p: 0.35, hours: [0.2, 12] }, // published reply rates 0.14-0.52 (docs/evidence.md); the CLI also runs 0.15 and 0.5
+    replyKind: { number: 0.5, freeText: 0.2, noneWork: 0.1, stop: 0.2 }, // stop = 0.07 of those messaged, low end of 0.07-0.26
     freeTextReadRight: 0.88, // measured: model-path first reads on the held-out set, 37/42 (docs/reply-eval.txt, 2 Nov 2026)
     confirmAfterHours: [0.1, 6],
     reminderAfterHours: 24,
@@ -37,8 +38,8 @@ export const ASSUMPTIONS = {
     frontDeskCall: { booked: 0.7, hours: [2, 24] },
   },
   withoutAgent: {
-    reviewHours: { critical: [2, 24], abnormal: [24, 120], normal: [48, 240] },
-    neverReviewed: 0.1,
+    reviewHours: { critical: [0.1, 1], abnormal: [24, 120], normal: [48, 240] }, // critical: phoned in minutes (Howanitz, Lynn); normal: no source
+    neverReviewed: { critical: 0, abnormal: 0.1, normal: 0.1 }, // abnormal: 0.07-0.18 published (Singh); normal: no source
     referralAccepted: { p: 0.6, days: [2, 20] },
     patientSelfBooks: 0.5,
   },
@@ -135,7 +136,7 @@ export function replay(withAgent, A = ASSUMPTIONS) {
       const at = hourOf();
       const r = { id: `r${ids.r++}`, patientId: patient().id, test: 'synthetic test', flag: pick(A.resultFlags, world), orderedBy: clinician(), receivedAt: iso(at), reviewedAt: null };
       later(at, () => data.results.push(r));
-      if (!withAgent && rand() >= A.withoutAgent.neverReviewed) later(at + between(A.withoutAgent.reviewHours[r.flag]) * HOUR, (t) => { r.reviewedAt = iso(t); });
+      if (!withAgent && rand() >= A.withoutAgent.neverReviewed[r.flag]) later(at + between(A.withoutAgent.reviewHours[r.flag]) * HOUR, (t) => { r.reviewedAt = iso(t); });
     }
     for (let i = 0; i < A.perWorkday.referrals; i += 1) {
       const at = hourOf();
