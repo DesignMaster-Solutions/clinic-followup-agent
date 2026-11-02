@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Measures the reply reader against what a front-desk person would do, on the synthetic sets:
 // data/replies-eval.json (dev set: base + hard, used while writing the prompt) and, when present,
-// data/replies-heldout.json (written separately by another model, never used to tune anything).
+// data/replies-heldout.json (written separately by another model, not to be used for tuning).
 // Always runs rules-only; with MODEL_URL set (an OpenAI-compatible endpoint) also rules + model.
 //   MODEL_URL=http://127.0.0.1:8093 node src/eval-replies.mjs
 //

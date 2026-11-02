@@ -81,7 +81,7 @@ The request is then matched against the real free slots of the right clinician, 
 
 **A time that came from the model is never booked directly.** It is held for the patient (12 hours at most, never closer than 2 hours to the visit) and confirmed with a scheduling-only message ("Dr. Saleh has Thu 5 Nov, 11:00 free for your follow-up visit. Reply 1 to confirm, or 0 and we will call you."). Only a clear yes books it; anything else releases the slot and hands over to a person. A held slot is not offered to anyone else.
 
-Measured with Gemma 4 E4B (Q8_0) running locally in llama.cpp, temperature 0, on 2 Nov 2026. The development set was used while writing the prompt and the rules; the held-out set was written separately by another model (GitHub Copilot CLI, auto mode) from a labelling guide, without access to the prompt or the development set, and was run once, with nothing changed afterwards.
+Measured with Gemma 4 E4B (Q8_0) running locally in llama.cpp, temperature 0, on 2 Nov 2026. The development set was used while writing the prompt and the rules; the held-out set was written separately by another model (GitHub Copilot CLI, auto mode) from a labelling guide, without access to the prompt or the development set. Nothing in the reader changed after the measured run, and a second run gave the same numbers.
 
 | Set | Rules only | Rules + model, first read | After confirmation | Wrong bookings kept |
 | --- | --- | --- | --- | --- |

@@ -30,7 +30,7 @@ export const ASSUMPTIONS = {
     planAfterEscalationHours: [4, 48],
     patientReplies: { p: 0.7, hours: [0.2, 12] },
     replyKind: { number: 0.6, freeText: 0.25, noneWork: 0.1, stop: 0.05 },
-    freeTextReadRight: 0.9, // first-read accuracy of the reply reader on free text; replace with the held-out number
+    freeTextReadRight: 0.88, // measured: model-path first reads on the held-out set, 37/42 (docs/reply-eval.txt, 2 Nov 2026)
     confirmAfterHours: [0.1, 6],
     reminderAfterHours: 24,
     callAfterNoReplyHours: 48,

@@ -2,9 +2,9 @@
 final = after the confirmation step; the patient confirms only the time they asked for
 
 rules only
-  base     first read 23/43  final 23/43  wrong bookings kept 0  confirmations asked 0 (0 wrong, refused)  en 13/23 ar 10/20
-  hard     first read 5/14   final 5/14   wrong bookings kept 0  confirmations asked 0 (0 wrong, refused)  en 3/7 ar 2/7
-  heldout  first read 19/49  final 19/49  wrong bookings kept 0  confirmations asked 0 (0 wrong, refused)  en 6/22 ar 9/23
+  base     first read 23/43  final 23/43  wrong bookings kept 0  confirmations asked 0 (0 wrong, refused)  en 13/23 ar 10/20  model path 0/0
+  hard     first read 5/14   final 5/14   wrong bookings kept 0  confirmations asked 0 (0 wrong, refused)  en 3/7 ar 2/7  model path 0/0
+  heldout  first read 19/49  final 19/49  wrong bookings kept 0  confirmations asked 0 (0 wrong, refused)  en 6/22 ar 9/23  model path 0/0
     miss [base en] "can I come Thursday after 5?" expected book:b1, first read handover
     miss [base en] "Tuesday works" expected book:a1, first read handover
     miss [base en] "I'll take the Wednesday morning one" expected book:a2, first read handover
@@ -66,9 +66,9 @@ rules only
     miss [heldout ar] "مش حابة توصلني رسائل تاني" expected stop, first read handover
 
 rules + model (http://127.0.0.1:8093)
-  base     first read 42/43  final 42/43  wrong bookings kept 0  confirmations asked 15 (0 wrong, refused)  en 23/23 ar 19/20
-  hard     first read 14/14  final 14/14  wrong bookings kept 0  confirmations asked 7 (0 wrong, refused)  en 7/7 ar 7/7
-  heldout  first read 44/49  final 45/49  wrong bookings kept 0  confirmations asked 18 (2 wrong, refused)  en 20/22 ar 20/23
+  base     first read 42/43  final 42/43  wrong bookings kept 0  confirmations asked 15 (0 wrong, refused)  en 23/23 ar 19/20  model path 28/29
+  hard     first read 14/14  final 14/14  wrong bookings kept 0  confirmations asked 7 (0 wrong, refused)  en 7/7 ar 7/7  model path 13/13
+  heldout  first read 44/49  final 45/49  wrong bookings kept 0  confirmations asked 18 (2 wrong, refused)  en 20/22 ar 20/23  model path 37/42
     miss [base ar] "صباح الخميس" expected book:a3, first read handover {"intent":"other","option":0,"day":5,"weekday":"thu","after":-1,"before":-1}
     miss [heldout en] "Day after tomorrow at 8:30" expected book:a2, first read handover {"intent":"ask_time","option":0,"day":5,"weekday":"thu","after":8,"before":9}
     miss [heldout en] "1 or 2, both fine" expected book:a1, first read book:a2 {"intent":"choose_option","option":2,"day":4,"weekday":"wed","after":8,"before":9}
